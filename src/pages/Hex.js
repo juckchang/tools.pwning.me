@@ -34,8 +34,20 @@ export default function Hex() {
     e.target.value.match(/.{1,2}/g).forEach(x => 
       r += String.fromCharCode(parseInt(x,16))
     )
-
     setText(r)
+  }
+
+  const preventTab = e => {
+    if (e.key === "Tab") {
+      e.preventDefault()
+      const start = e.target.selectionStart
+      const end = e.target.selectionEnd
+
+      e.target.value =
+      e.target.value.substring(0, start) + "\t" + e.target.value.substring(end);
+
+      e.target.selectionStart = e.target.selectionEnd = start + 1;
+    }
   }
 
   return (
@@ -57,6 +69,7 @@ export default function Hex() {
             id="outlined-adornment-password"
             value={text}
             onChange={changeText}
+            onKeyDown={preventTab}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -84,6 +97,7 @@ export default function Hex() {
             id="outlined-adornment-password"
             value={hex}
             onChange={changeHex}
+            onKeyDown={preventTab}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton

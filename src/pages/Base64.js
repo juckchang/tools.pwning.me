@@ -29,6 +29,19 @@ export default function Base64() {
     setText(atob(e.target.value))
   }
 
+  const preventTab = e => {
+    if (e.key === "Tab") {
+      e.preventDefault()
+      const start = e.target.selectionStart
+      const end = e.target.selectionEnd
+
+      e.target.value =
+      e.target.value.substring(0, start) + "\t" + e.target.value.substring(end);
+
+      e.target.selectionStart = e.target.selectionEnd = start + 1;
+    }
+  }
+
   return (
     <Box
       component="form"
@@ -48,6 +61,7 @@ export default function Base64() {
             id="outlined-adornment-password"
             value={text}
             onChange={changeText}
+            onKeyDown={preventTab}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -75,6 +89,7 @@ export default function Base64() {
             id="outlined-adornment-password"
             value={base64}
             onChange={changeBase64}
+            onKeyDown={preventTab}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
