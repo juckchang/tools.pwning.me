@@ -12,6 +12,7 @@ export default function Navbar() {
         <Toolbar>
           <Button color="inherit"><Link to="/base64">Base64</Link></Button>
           <Button color="inherit"><Link to="/hex">Hex</Link></Button>
+          <Button color="inherit"><Link to="/url">Url</Link></Button>
         </Toolbar>
       </AppBar>
     </Box>

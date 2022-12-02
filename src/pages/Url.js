@@ -7,26 +7,26 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
-export default function Base64() {
+export default function Url() {
   const [text, setText] = useState('')
-  const [base64, setBase64] = useState('')
+  const [url, setUrl] = useState('')
 
   const changeText = e => {
     setText(e.target.value)
-    setBase64(btoa(e.target.value))
+    setUrl(encodeURIComponent(e.target.value))
   }
 
   const copyText = async e => {
     await navigator.clipboard.writeText(text)
   }
 
-  const copyBase64 = async e => {
-    await navigator.clipboard.writeText(base64)
+  const copyUrl = async e => {
+    await navigator.clipboard.writeText(url)
   }
 
-  const changeBase64 = e => {
-    setBase64(e.target.value)
-    setText(atob(e.target.value))
+  const changeUrl = e => {
+    setUrl(e.target.value)
+    setText(decodeURIComponent(e.target.value))
   }
 
   const preventTab = e => {
@@ -83,18 +83,18 @@ export default function Base64() {
       <br />
       <br />
       <FormControl sx={{ m: 1, width: '120ch' }} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Base64</InputLabel>
+          <InputLabel htmlFor="outlined-adornment-password">Url</InputLabel>
           <OutlinedInput
             id="outlined-adornment-password"
-            value={base64}
-            onChange={changeBase64}
+            value={url}
+            onChange={changeUrl}
             onKeyDown={preventTab}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
                   edge="end"
-                  onClick={copyBase64}
+                  onClick={copyUrl}
                 >
                   <ContentCopyIcon />
                 </IconButton>
@@ -102,7 +102,7 @@ export default function Base64() {
             }
             multiline
             rows={10}
-            label="Base64"
+            label="Url"
           />
         </FormControl>
     </Box>
