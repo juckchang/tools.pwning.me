@@ -15,7 +15,7 @@ export default function Hex() {
     setText(e.target.value)
     let r = ''
     e.target.value.split('').forEach(x => {
-      r += x.charCodeAt(0).toString(16)
+      r += x.charCodeAt(0).toString(16).padStart(2,0)
     })
     setHex(r)
   }
